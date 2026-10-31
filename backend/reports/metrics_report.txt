@@ -1,0 +1,75 @@
+======================================================================
+SafeWeb model training
+======================================================================
+Loaded 297,803 rows; 0 duplicate URLs dropped.
+Extracting features ...
+Groups: 137,599 (from 141,194 domains; 747 shared phishing-kit templates merged). Largest group = 661 rows (0.22%).
+
+Dataset composition (after cleaning):
+  total 297,803 URLs | legitimate 237,942 | phishing 59,861
+  train         208,466 rows   phishing 20.1%
+  validation     29,779 rows   phishing 20.1%
+  calibration    29,779 rows   phishing 20.1%
+  test           29,779 rows   phishing 20.1%
+
+Comparing 5 models: logistic_regression, decision_tree, random_forest, gradient_boosting, xgboost
+  logistic_regression  PR-AUC 0.4140  recall@P95 0.000  size 0.0 MB  (9s)
+  decision_tree        PR-AUC 0.5082  recall@P95 0.000  size 0.1 MB  (11s)
+  random_forest        PR-AUC 0.5721  recall@P95 0.046  size 34.4 MB  (40s)
+  gradient_boosting    PR-AUC 0.5390  recall@P95 0.018  size 0.1 MB  (194s)
+  xgboost              PR-AUC 0.5887  recall@P95 0.059  size 0.4 MB  (22s)
+
+Validation comparison (selection score = mean of PR-AUC and recall at 95% precision):
+              model  val_roc_auc  val_pr_auc  val_recall_at_precision95  val_best_f1  cv_pr_auc_mean  cv_pr_auc_std  size_mb  eligible
+            xgboost       0.8372      0.5887                     0.0586       0.5553          0.5531         0.0071   0.4397      True
+      random_forest       0.8331      0.5721                     0.0464       0.5426          0.5356         0.0075  34.3676      True
+  gradient_boosting       0.8199      0.5390                     0.0180       0.5327          0.5083         0.0092   0.1065      True
+      decision_tree       0.8050      0.5082                     0.0000       0.5153          0.4748         0.0123   0.0560      True
+logistic_regression       0.7750      0.4140                     0.0000       0.4886          0.4183         0.0105   0.0020      True
+
+SELECTED MODEL: xgboost
+  WARNING: cross-validation and validation PR-AUC differ by 0.036 - the estimate is unstable; treat results with caution.
+
+Calibration (fit on calibration split, scored on validation split; lower = better):
+  none      ECE 0.1838   Brier 0.1666
+  platt     ECE 0.0112   Brier 0.1177
+  isotonic  ECE 0.0084   Brier 0.1179   <- chosen
+
+Suggested decision zones from validation data:
+  p <= 0.056  -> likely legitimate   (<= 2% phishing among them)
+  p >= 0.947  -> likely phishing     (>= 95% precision)
+  in between -> UNKNOWN / insufficient evidence
+
+======================================================================
+FINAL TEST RESULTS (held-out domains; touched once)
+======================================================================
+Test URLs: 29,779  (phishing 20.1%)
+ROC-AUC 0.8406 | PR-AUC 0.5792 | Brier 0.1168 | ECE 0.0072
+At threshold 0.50: accuracy 0.8373, precision 0.6752, recall 0.3674, F1 0.4758, false-positive rate 0.0445
+Confusion matrix [tn fp / fn tp]: 22,735 1,058 / 3,787 2,199
+With the UNKNOWN zone: 38.4% called legitimate (phishing among them: 2.5%), 0.7% called phishing (precision 96.0%), 60.9% UNKNOWN.
+
+Performance by URL structure (test set):
+  bare domain (no path/query)    n=  5,912 phishing 35.4%  ROC-AUC 0.707  recall 0.423  FPR 0.107
+  has a path                     n= 23,867 phishing 16.3%  ROC-AUC 0.858  recall 0.337  FPR 0.032
+  has a query string             n=  3,809 phishing 7.4%  ROC-AUC 0.863  recall 0.300  FPR 0.005
+
+Ablation on the test set (same algorithm, fewer features):
+  all_features           ROC-AUC 0.841   PR-AUC 0.579
+  host_only              ROC-AUC 0.638   PR-AUC 0.365
+  path_and_length_only   ROC-AUC 0.763   PR-AUC 0.434
+  -> If 'path_and_length_only' is high, much of the skill comes from URL length/path
+     differences between the dataset's classes (a shortcut), not from phishing behaviour.
+
+Top features by permutation importance (association, NOT causation):
+  tld_length               0.1042 +/- 0.0021
+  num_hyphens              0.1035 +/- 0.0045
+  path_length              0.0513 +/- 0.0043
+  digit_ratio              0.0479 +/- 0.0030
+  num_dots                 0.0430 +/- 0.0008
+  letter_ratio             0.0401 +/- 0.0015
+  num_path_segments        0.0399 +/- 0.0011
+  url_length               0.0377 +/- 0.0020
+
+Saved: website_safety_model.joblib (0.4 MB), feature_schema.json, model_metadata.json, plus reports in reports/
+Total time: 5.7 min

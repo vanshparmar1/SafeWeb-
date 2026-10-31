@@ -1,0 +1,38 @@
+NOTE: C:\Users\asus\OneDrive\Desktop\project\safeWeb\backend\dataset\raw\tranco.csv not found - only the manual noise list is applied.
+Raw rows: 651,191
+Rows with type benign/phishing: 522,214
+Rejected as malformed / scraping artifacts (rule x class):
+type                    benign  phishing
+reject                                  
+backslash                    4         0
+control_or_space_chars     141       132
+html_entity               4915      2931
+invalid_host                 0         4
+over_2048_chars              2         0
+quote_wrapped             3434       336
+unparsable                   0         3
+Total rejected: 11,902
+URLs with both labels (removed): 3,757
+Duplicate URLs removed after normalisation: 1,877
+Mixed domains excluded: 2,502 domains / 133,047 rows (see reports/excluded_mixed_domains.csv)
+Phishing rows removed from legitimate/popular domains: 3,333 rows / 2 domains (manual list only - no Tranco file)
+Removed by per-domain cap (100): 66,608
+
+FINAL rows: 297,803  |  unique domains: 141,194
+benign (0): 237,942   phishing (1): 59,861   phishing share: 20.1%
+
+Structure by class AFTER cleaning (check for big gaps = shortcuts):
+          has_path  has_query  digits_in_host  hyphen_in_host  median_len  median_host_len
+label                                                                                     
+benign       0.836      0.153           0.072           0.083        45.0             15.0
+phishing     0.649      0.048           0.115           0.166        28.0             16.0
+
+Largest phishing domains kept (eyeball these for label noise):
+  sharepoint.com                100   e.g. ['39383980492132-my.sharepoint.com/:b:/g/personal/admin_39383980492132_onmicrosoft_com/EZdn6LrazXlBvm8nQ6RsxcUBVjIztX06j-kSdU_5LH9s6w?e=2hmCOk', 'aadaedu-my.sharepoint.com/:o:/g/personal/sherring_aada_edu1/EpxaaqphuZVNqoye4vgLdzkBZMUd1mIJ-EK8R72WltpdyQ?e=sZm5kY']
+  naylorantiques.com            100   e.g. ['naylorantiques.com/%20*/ZLNWQMIGQZGQYFJUHAIDEDRMJUZIYQMGNIMKCUYFKAMMYZHGQQEBTDFMJOOUIABNWSUJZHFWSHHUFXGJHCTIFDGELITMCYDWNIC/RAOWUGFWXWGCWDIJTUADYGOVHSTCPLLUYGOGUUIYMPUIYVRLORZYKMXGDCKOQNUKYEINWNMNXRTSNKPIZCYLQNSIWGEEGCFNIMS/', 'naylorantiques.com/14%20a584%202ff158%204f99/Q89592/']
+  000webhostapp.com             100   e.g. ['416c6447656e.000webhostapp.com', 'accounts-cleim.000webhostapp.com']
+  beget.tech                    100   e.g. ['a70892jf.beget.tech', 'account-limited-ticket-10212139.smtp2ggs.beget.tech']
+  googleapis.com                100   e.g. ['1477304571.storage.googleapis.com/1477304571.html', 'firebasestorage.googleapis.com/v0/b/acla0c78arra.appspot.com/o/index.htm?alt=media&token=dc199f9d-0a1f-4ece-a649-418760597eee']
+  id8-eu.co.uk                  100   e.g. ['appleid.apple.co.uk.cgi-bin.webobjects.myappleid.woa.verify0.id8-eu.co.uk/identify-customer=06HsX391zuKrEjSMvcoeI7l8q14UoIUGvUeDLwtf0B36MWRJbrvrn6mxERhCQYVgq7vH0CfFjbhbAPFX01bkIevEpBQhXguCTosy/', 'appleid.apple.co.uk.cgi-bin.webobjects.myappleid.woa.verify0.id8-eu.co.uk/identify-customer=1hJmtMByghjwxGNNZnsoQbzKTqZH175F5K1qN5RytnnQU9KkJ0999aDq3z1pncQ7SBcr7bnYr4aiQQ15XBXVmeiitv9kRHGhTS3k/']
+  id8-eu.net                     98   e.g. ['appleid.apple.co.uk.cgi-bin.webobjects.myappleid.woa.verify0.id8-eu.net/identify-customer=0rY87mECpUtYL8Tm60YwLG9VOMVKZLhO2j4E7z2QBECHHWwQm2nOCUjDKFkEAQCjo0281IjLGZHjolrS9k6fZtY1lvwyIkyxPKqw/', 'appleid.apple.co.uk.cgi-bin.webobjects.myappleid.woa.verify0.id8-eu.net/identify-customer=1hJmtMByghjwxGNNZnsoQbzKTqZH175F5K1qN5RytnnQU9KkJ0999aDq3z1pncQ7SBcr7bnYr4aiQQ15XBXVmeiitv9kRHGhTS3k/']
+  id-app7.co.uk                  96   e.g. ['appleid.apple.co.uk.cgi-bin.webobjects.myappleid.woa.verify0.id-app7.co.uk/identify-customer=6kwiunPwY39RJ1SqtbTDB41xwbnmtti2KyIvyBuhVYsoP3211wAUwOXCpxxY6U8oAirBlTkjESP7lc9D8qO3YklTk2qqbGJHKWmK/', 'appleid.apple.co.uk.cgi-bin.webobjects.myappleid.woa.verify0.id-app7.co.uk/identify-customer=7gqIFbqj8arzSIQO5462DGWSCYDxgFcMXV0VVmRocB9YDXSVIl1eZXQ59t7hONf6Cy0nMNK3AXoC9tBGK0a7HH4hMrD16GBsW593/']

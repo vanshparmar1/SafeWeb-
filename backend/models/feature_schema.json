@@ -1,0 +1,205 @@
+{
+  "feature_version": "1.0",
+  "feature_names": [
+    "url_length",
+    "domain_length",
+    "path_length",
+    "query_length",
+    "num_dots",
+    "num_hyphens",
+    "host_hyphens",
+    "num_underscores",
+    "num_special_chars",
+    "num_subdomains",
+    "num_query_params",
+    "num_path_segments",
+    "digit_ratio",
+    "letter_ratio",
+    "special_char_ratio",
+    "has_ip_address",
+    "has_at_symbol",
+    "has_unusual_port",
+    "has_punycode",
+    "has_url_encoding",
+    "is_shortener",
+    "has_double_slash_in_path",
+    "domain_entropy",
+    "path_entropy",
+    "longest_domain_token",
+    "digits_in_domain",
+    "tld_length"
+  ],
+  "normalization_steps": [
+    "strip_whitespace",
+    "remove_scheme",
+    "lowercase_host",
+    "remove_leading_www",
+    "drop_fragment",
+    "drop_bare_root_slash"
+  ],
+  "n_features": 27,
+  "training_feature_ranges": {
+    "url_length": {
+      "min": 2.0,
+      "p0_5": 9.0,
+      "p99_5": 235.0,
+      "max": 1633.0
+    },
+    "domain_length": {
+      "min": 2.0,
+      "p0_5": 6.0,
+      "p99_5": 132.0,
+      "max": 244.0
+    },
+    "path_length": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 150.0,
+      "max": 1008.0
+    },
+    "query_length": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 138.0,
+      "max": 1585.0
+    },
+    "num_dots": {
+      "min": 0.0,
+      "p0_5": 1.0,
+      "p99_5": 12.0,
+      "max": 37.0
+    },
+    "num_hyphens": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 16.0,
+      "max": 42.0
+    },
+    "host_hyphens": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 4.0,
+      "max": 20.0
+    },
+    "num_underscores": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 7.0,
+      "max": 64.0
+    },
+    "num_special_chars": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 22.0,
+      "max": 138.0
+    },
+    "num_subdomains": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 10.0,
+      "max": 33.0
+    },
+    "num_query_params": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 5.0,
+      "max": 51.0
+    },
+    "num_path_segments": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 8.0,
+      "max": 27.0
+    },
+    "digit_ratio": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.4501767015706776,
+      "max": 0.8089887640449438
+    },
+    "letter_ratio": {
+      "min": 0.0,
+      "p0_5": 0.4,
+      "p99_5": 0.9629629629629629,
+      "max": 1.0
+    },
+    "special_char_ratio": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.2167463669109384,
+      "max": 0.42857142857142855
+    },
+    "has_ip_address": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.0,
+      "max": 1.0
+    },
+    "has_at_symbol": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.0,
+      "max": 1.0
+    },
+    "has_unusual_port": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.0,
+      "max": 1.0
+    },
+    "has_punycode": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.0,
+      "max": 1.0
+    },
+    "has_url_encoding": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 1.0,
+      "max": 1.0
+    },
+    "is_shortener": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.0,
+      "max": 1.0
+    },
+    "has_double_slash_in_path": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 0.0,
+      "max": 1.0
+    },
+    "domain_entropy": {
+      "min": 1.0,
+      "p0_5": 2.2516291673878226,
+      "p99_5": 4.611508850940084,
+      "max": 5.04150639566353
+    },
+    "path_entropy": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 5.036705325737863,
+      "max": 5.913051722922274
+    },
+    "longest_domain_token": {
+      "min": 2.0,
+      "p0_5": 3.0,
+      "p99_5": 44.0,
+      "max": 63.0
+    },
+    "digits_in_domain": {
+      "min": 0.0,
+      "p0_5": 0.0,
+      "p99_5": 31.0,
+      "max": 134.0
+    },
+    "tld_length": {
+      "min": 0.0,
+      "p0_5": 2.0,
+      "p99_5": 6.0,
+      "max": 18.0
+    }
+  }
+}

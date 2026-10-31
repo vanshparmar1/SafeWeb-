@@ -1,0 +1,317 @@
+{
+  "created_at_utc": "2026-10-30T08:40:31+00:00",
+  "random_seed": 42,
+  "fast_mode": false,
+  "versions": {
+    "python": "3.13.5",
+    "scikit_learn": "1.9.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0"
+  },
+  "dataset": {
+    "file": "phishing_dataset.csv",
+    "rows": 297803,
+    "domains": 141194,
+    "phishing_rows": 59861,
+    "legitimate_rows": 237942,
+    "splits": {
+      "train": {
+        "rows": 208466,
+        "phishing": 41905,
+        "phishing_share": 0.20101599301564763
+      },
+      "validation": {
+        "rows": 29779,
+        "phishing": 5985,
+        "phishing_share": 0.20098055676819235
+      },
+      "calibration": {
+        "rows": 29779,
+        "phishing": 5985,
+        "phishing_share": 0.20098055676819235
+      },
+      "test": {
+        "rows": 29779,
+        "phishing": 5986,
+        "phishing_share": 0.2010141374794318
+      }
+    },
+    "grouping": "registered domain + shared phishing-kit templates"
+  },
+  "model": {
+    "selected": "xgboost",
+    "estimator": "XGBClassifier(base_score=None, booster=None, callbacks=None,\n              colsample_bylevel=None, colsample_bynode=None,\n              colsample_bytree=0.8, device=None, early_stopping_rounds=None,\n              enable_categorical=True, eval_metric='logloss',\n              feature_types=None, feature_weights=None, gamma=None,\n              grow_policy=None, importance_type=None,\n              interaction_constraints=None, learning_rate=0.1, max_bin=None,\n              max_cat_threshold=None, ma",
+    "file_size_mb": 0.441088,
+    "calibration_method": "isotonic",
+    "calibration_scores_on_validation": {
+      "none": {
+        "brier": 0.1665678471326828,
+        "ece": 0.18383323729444556
+      },
+      "platt": {
+        "brier": 0.11773566156625748,
+        "ece": 0.011211404960760524
+      },
+      "isotonic": {
+        "brier": 0.11793165653944016,
+        "ece": 0.008400788369581262
+      }
+    },
+    "imbalance_handling": "class weights / sample weights (no oversampling)"
+  },
+  "model_comparison": [
+    {
+      "model": "xgboost",
+      "val_roc_auc": 0.837177976883033,
+      "val_pr_auc": 0.588711631230503,
+      "val_recall_at_precision95": 0.058646616541353384,
+      "val_best_f1": 0.5552677029360967,
+      "f1_precision": 0.4876753886992795,
+      "f1_recall": 0.6446115288220552,
+      "cv_pr_auc_mean": 0.5530929142627768,
+      "cv_pr_auc_std": 0.007059710160172097,
+      "cv_vs_val_gap": 0.035618716967726116,
+      "size_mb": 0.439733,
+      "eligible": true,
+      "selection_score": 0.3236791238859282,
+      "fit_seconds": 22.307636976242065
+    },
+    {
+      "model": "random_forest",
+      "val_roc_auc": 0.8331255733123962,
+      "val_pr_auc": 0.572146858926252,
+      "val_recall_at_precision95": 0.04644945697577277,
+      "val_best_f1": 0.5426089678378591,
+      "f1_precision": 0.5103032087135708,
+      "f1_recall": 0.5792815371762741,
+      "cv_pr_auc_mean": 0.535636704077329,
+      "cv_pr_auc_std": 0.007470111180638218,
+      "cv_vs_val_gap": 0.03651015484892306,
+      "size_mb": 34.367602,
+      "eligible": true,
+      "selection_score": 0.3092981579510124,
+      "fit_seconds": 40.01549172401428
+    },
+    {
+      "model": "gradient_boosting",
+      "val_roc_auc": 0.8198557775459073,
+      "val_pr_auc": 0.5390318715642021,
+      "val_recall_at_precision95": 0.01804511278195489,
+      "val_best_f1": 0.532674274914589,
+      "f1_precision": 0.4714359238291302,
+      "f1_recall": 0.6121971595655806,
+      "cv_pr_auc_mean": 0.5082920732048043,
+      "cv_pr_auc_std": 0.009192925333676232,
+      "cv_vs_val_gap": 0.030739798359397774,
+      "size_mb": 0.106523,
+      "eligible": true,
+      "selection_score": 0.27853849217307847,
+      "fit_seconds": 193.50031685829163
+    },
+    {
+      "model": "decision_tree",
+      "val_roc_auc": 0.8049715396894915,
+      "val_pr_auc": 0.5081546817392081,
+      "val_recall_at_precision95": 0.0,
+      "val_best_f1": 0.5153374233128835,
+      "f1_precision": 0.4458272327964861,
+      "f1_recall": 0.6105263157894737,
+      "cv_pr_auc_mean": 0.47482522220743,
+      "cv_pr_auc_std": 0.012276409290113071,
+      "cv_vs_val_gap": 0.03332945953177807,
+      "size_mb": 0.056019,
+      "eligible": true,
+      "selection_score": 0.25407734086960404,
+      "fit_seconds": 10.506186962127686
+    },
+    {
+      "model": "logistic_regression",
+      "val_roc_auc": 0.7749835454119595,
+      "val_pr_auc": 0.4139767822283549,
+      "val_recall_at_precision95": 0.0,
+      "val_best_f1": 0.48860673393039333,
+      "f1_precision": 0.36973492322209833,
+      "f1_recall": 0.7201336675020885,
+      "cv_pr_auc_mean": 0.4182762494682222,
+      "cv_pr_auc_std": 0.010514434253214836,
+      "cv_vs_val_gap": 0.0042994672398673495,
+      "size_mb": 0.002045,
+      "eligible": true,
+      "selection_score": 0.20698839111417744,
+      "fit_seconds": 8.979978322982788
+    }
+  ],
+  "decision_zones": {
+    "t_safe": 0.056137725710868835,
+    "t_phish": 0.9473683834075928,
+    "max_miss_rate": 0.02,
+    "min_precision": 0.95
+  },
+  "test_metrics": {
+    "n": 29779,
+    "phishing_share": 0.2010141374794318,
+    "roc_auc": 0.8406042846525331,
+    "pr_auc": 0.5791520712696214,
+    "brier": 0.11675139516592026,
+    "ece": 0.007161552889413368,
+    "at_threshold_0.5": {
+      "threshold": 0.5,
+      "accuracy": 0.8373014540447967,
+      "precision": 0.6751611912803193,
+      "recall": 0.36735716672235214,
+      "f1": 0.47581953911067837,
+      "false_positive_rate": 0.04446686000084058,
+      "tn": 22735,
+      "fp": 1058,
+      "fn": 3787,
+      "tp": 2199
+    },
+    "at_t_phish": {
+      "threshold": 0.9473683834075928,
+      "accuracy": 0.8052318748111085,
+      "precision": 0.9603960396039604,
+      "recall": 0.032408954226528564,
+      "f1": 0.06270200387847447,
+      "false_positive_rate": 0.0003362333459420838,
+      "tn": 23785,
+      "fp": 8,
+      "fn": 5792,
+      "tp": 194
+    },
+    "selective": {
+      "share_called_legitimate": 0.3837603680445952,
+      "share_called_phishing": 0.006783303670371738,
+      "share_unknown": 0.609456328285033,
+      "phishing_rate_among_called_legitimate": 0.025376268813440673,
+      "precision_among_called_phishing": 0.9603960396039604,
+      "phishing_share_inside_unknown_zone": 0.3031571987437324
+    }
+  },
+  "test_slices": {
+    "bare domain (no path/query)": {
+      "n": 5912,
+      "phishing_share": 0.35351826792963464,
+      "roc_auc": 0.7074219640009115,
+      "pr_auc": 0.595075534046882,
+      "recall_at_0_5": 0.423444976076555,
+      "false_positive_rate_at_0_5": 0.10727367870225013
+    },
+    "has a path": {
+      "n": 23867,
+      "phishing_share": 0.1632379436041396,
+      "roc_auc": 0.8578375888364618,
+      "pr_auc": 0.5652320594006941,
+      "recall_at_0_5": 0.3372689938398357,
+      "false_positive_rate_at_0_5": 0.03244704821991888
+    },
+    "has a query string": {
+      "n": 3809,
+      "phishing_share": 0.07429771593594119,
+      "roc_auc": 0.862654806595728,
+      "pr_auc": 0.5412602488880538,
+      "recall_at_0_5": 0.3003533568904594,
+      "false_positive_rate_at_0_5": 0.005388542257515599
+    }
+  },
+  "ablation": {
+    "all_features": {
+      "roc_auc": 0.8406042846525331,
+      "pr_auc": 0.5791520712696214
+    },
+    "host_only": {
+      "roc_auc": 0.6376337583896322,
+      "pr_auc": 0.36487270131931204,
+      "features": [
+        "domain_length",
+        "host_hyphens",
+        "num_subdomains",
+        "has_ip_address",
+        "has_at_symbol",
+        "has_unusual_port",
+        "has_punycode",
+        "is_shortener",
+        "domain_entropy",
+        "longest_domain_token",
+        "digits_in_domain",
+        "tld_length"
+      ]
+    },
+    "path_and_length_only": {
+      "roc_auc": 0.7630112257479026,
+      "pr_auc": 0.4341947449628181,
+      "features": [
+        "url_length",
+        "path_length",
+        "query_length",
+        "num_path_segments",
+        "num_query_params",
+        "path_entropy"
+      ]
+    }
+  },
+  "top_features_permutation": [
+    {
+      "feature": "tld_length",
+      "importance_mean": 0.10415193132075527,
+      "importance_std": 0.0020710824252710897
+    },
+    {
+      "feature": "num_hyphens",
+      "importance_mean": 0.10352877138032283,
+      "importance_std": 0.004536196764003614
+    },
+    {
+      "feature": "path_length",
+      "importance_mean": 0.0513071024501518,
+      "importance_std": 0.004301181933913402
+    },
+    {
+      "feature": "digit_ratio",
+      "importance_mean": 0.047921248536631524,
+      "importance_std": 0.0030218701793329047
+    },
+    {
+      "feature": "num_dots",
+      "importance_mean": 0.043021736156563205,
+      "importance_std": 0.0007882031593730081
+    },
+    {
+      "feature": "letter_ratio",
+      "importance_mean": 0.04013746442859545,
+      "importance_std": 0.0014652194805188654
+    },
+    {
+      "feature": "num_path_segments",
+      "importance_mean": 0.03992681184576463,
+      "importance_std": 0.0010846824692993336
+    },
+    {
+      "feature": "url_length",
+      "importance_mean": 0.03768837979516548,
+      "importance_std": 0.002046369122135151
+    },
+    {
+      "feature": "path_entropy",
+      "importance_mean": 0.03539582900190937,
+      "importance_std": 0.0017009016244954884
+    },
+    {
+      "feature": "num_underscores",
+      "importance_mean": 0.03123868991918699,
+      "importance_std": 0.001361319158876566
+    }
+  ],
+  "limitations": [
+    "Trained on URL text only; page content, DNS, certificates and reputation are separate evidence layers.",
+    "Class balance in the data (~20% phishing) is not the real-world rate, so precision on live traffic will differ.",
+    "Labels come from a public compilation and contain noise; results are estimates, not guarantees.",
+    "Feature importance shows association, not causation."
+  ],
+  "plots": [
+    "confusion_matrix.png",
+    "roc_pr_curves.png",
+    "calibration_curve.png",
+    "feature_importance.png"
+  ],
+  "training_seconds": 342.43366622924805
+}
